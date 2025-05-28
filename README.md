@@ -24,6 +24,3 @@ Translates American Sign Language (ASL) alphabet gestures into text and speech u
 - Support full ASL words/sentences with LSTM/Transformer models
 - Increase dataset variety with user-collected data
 - Optimize model for mobile or embedded use
-
-## License
-MIT
