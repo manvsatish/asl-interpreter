@@ -1,24 +1,39 @@
 import streamlit as st
 import cv2
-import numpy as np
+import time
 from gesture_recognition import predict_sign
-from utils import speak
 
-st.title("ASL Alphabet Translator")
+st.set_page_config(layout="wide")
+st.title("🤟 Real-Time ASL Alphabet Translator")
 
-img = st.camera_input("Take a picture")
+FRAME_WINDOW = st.image([])
+prediction_placeholder = st.empty()
 
-if img is not None:
-    # Convert image to OpenCV format
-    file_bytes = np.asarray(bytearray(img.read()), dtype=np.uint8)
-    frame = cv2.imdecode(file_bytes, 1)
+start = st.checkbox("Start Webcam")
 
-    prediction, annotated_frame = predict_sign(frame)
+# Use AVFoundation backend on macOS
+cap = cv2.VideoCapture(0, cv2.CAP_AVFOUNDATION)
 
-    if prediction:
-        st.success(f"Detected Sign: **{prediction}**")
-        if st.button('Speak'):
-            speak(prediction)
+if start:
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            st.warning("Unable to access webcam")
+            break
 
-    # Show annotated image
-    st.image(cv2.cvtColor(annotated_frame, cv2.COLOR_BGR2RGB), caption="Annotated Frame")
+        prediction, annotated = predict_sign(frame)
+
+        FRAME_WINDOW.image(cv2.cvtColor(annotated, cv2.COLOR_BGR2RGB), channels="RGB")
+
+        if prediction:
+            prediction_placeholder.markdown(f"### ✋ Detected Sign: **{prediction}**")
+        else:
+            prediction_placeholder.markdown("### ✋ No hand detected")
+
+        time.sleep(0.1)
+
+        if not st.session_state.get("Start Webcam", True):
+            break
+else:
+    cap.release()
+    prediction_placeholder.markdown("### Webcam Off")
