@@ -26,9 +26,9 @@ if start:
         FRAME_WINDOW.image(cv2.cvtColor(annotated, cv2.COLOR_BGR2RGB), channels="RGB")
 
         if prediction:
-            prediction_placeholder.markdown(f"### ✋ Detected Sign: **{prediction}**")
+            prediction_placeholder.markdown(f"### Detected Sign: **{prediction}**")
         else:
-            prediction_placeholder.markdown("### ✋ No hand detected")
+            prediction_placeholder.markdown("### No hand detected")
 
         time.sleep(0.1)
 
