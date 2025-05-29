@@ -6,7 +6,6 @@ Translates American Sign Language (ASL) alphabet gestures into text and speech u
 ## Features
 - Webcam-based real-time hand landmark detection (MediaPipe)
 - Gesture classification with RandomForest model
-- Text-to-speech conversion (gTTS)
 - Streamlit app for easy use
 
 ## Installation
