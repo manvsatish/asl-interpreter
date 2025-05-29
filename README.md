@@ -18,9 +18,8 @@ Translates American Sign Language (ASL) alphabet gestures into text and speech u
 
 ## Usage
 - Check "Start Webcam" to begin sign recognition.
-- Detected signs show up as text and can be spoken aloud.
+- Detected signs show up as text.
 
 ## Future Improvements
 - Support full ASL words/sentences with LSTM/Transformer models
 - Increase dataset variety with user-collected data
-- Optimize model for mobile or embedded use
